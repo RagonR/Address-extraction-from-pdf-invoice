@@ -1,13 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from ui import main
+import FileBrowserGUI
 
 
 class Data:
     file_path = "No file selected"
 
 
-class MyFileBrowser(main.Ui_MainWindow, QtWidgets.QMainWindow):
+class MyFileBrowser(FileBrowserGUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def __init__(self):
         super(MyFileBrowser, self).__init__()
         self.model = QtWidgets.QFileSystemModel()

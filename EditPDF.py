@@ -82,24 +82,12 @@ def add_to_page(pdf_writer, customer_address, counter, amount_of_pages):
         print("add_to_page failed")
 
 
-# def test():
-#     pdf_writer = FPDF()
-#     for file in os.listdir(Dir.png_dir):
-#         if file.endswith('.png'):
-#             pdf_writer.add_page()
-#             pdf_writer.image(Dir.png_dir + file, 0, 0, w=210, h=297, type='PNG')
-#     pdf_writer.output(Dir.address_page_dir + "Addresses" + ".pdf")
-
-
 def add_to_pdf(order_pdf):
     pdf_document = order_pdf
     pdf = PyPDF2.PdfFileReader(pdf_document)
-
     # Output files for new PDFs
     output_filename_odd = Dir.address_page_dir + "Addresses.pdf"
-
     pdf_writer_odd = PyPDF2.PdfFileWriter()
-
     # Get reach page and add it to corresponding
     # output file based on page number
     for page in range(pdf.getNumPages()):
@@ -120,6 +108,3 @@ def clear_folder(path, file_type):
         if file.endswith(file_type):
             os.remove(path + file)
     print("Folder " + path + " cleared")
-
-# add_to_pdf("ORDERIAI.pdf")
-# test()

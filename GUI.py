@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.fb = FileBrowser.MyFileBrowser()
 
-    def setupUi(self, Dialog):
+    def setup_ui(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(QtCore.Qt.WindowModal)
         Dialog.resize(225, 235)
@@ -24,7 +24,6 @@ class Ui_Dialog(object):
         icon.addPixmap(QtGui.QPixmap("PDFEditor.ico"), QtGui.QIcon.Normal,
                        QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
-        # Dialog.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         Dialog.setStyleSheet("background-color: rgb(145, 8, 3);")
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(30, 0, 161, 229))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -94,33 +93,33 @@ class Ui_Dialog(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout.addWidget(self.pushButton_2)
 
-        self.retranslateUi(Dialog)
+        self.retranslate_ui(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.pushButton.clicked.connect(self.getFileBrowser)
-        self.pushButton_2.clicked.connect(self.Edit_Selected_PDF)
+        self.pushButton.clicked.connect(self.get_file_browser)
+        self.pushButton_2.clicked.connect(self.edit_selected_pdf)
 
-    def getFileBrowser(self):
+    def get_file_browser(self):
         try:
-            self.fb.closeEvent = self.CloseEvent
+            self.fb.closeEvent = self.close_event
             self.fb.show()
         except:
             print("failed")
 
-    def CloseEvent(self, event):
-        self.set_Text_Browser()
+    def close_event(self, event):
+        self.set_text_browser()
 
-    def set_Text_Browser(self):
+    def set_text_browser(self):
         self.textBrowser.clear()
         self.textBrowser.insertPlainText(os.path.basename(FileBrowser.Data.file_path))
 
-    def Edit_Selected_PDF(self):
+    def edit_selected_pdf(self):
         if FileBrowser.Data.file_path.endswith('.pdf') | FileBrowser.Data.file_path.endswith('.PDF'):
             EditPDF.convert_pfd_to_pngs(FileBrowser.Data.file_path)
         else:
             self.error_dialog.showMessage('Selected file is not PDF')
 
-    def retranslateUi(self, Dialog):
+    def retranslate_ui(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "PDF Editor"))
         self.pushButton.setText(_translate("Dialog", "Select File"))
@@ -137,6 +136,6 @@ if __name__ == "__main__":
                                QtCore.Qt.WindowCloseButtonHint |
                                QtCore.Qt.WindowStaysOnTopHint)
     ui = Ui_Dialog()
-    ui.setupUi(Dialog)
+    ui.setup_ui(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
